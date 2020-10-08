@@ -9,6 +9,9 @@ namespace TicTacToe
     class TicTacToeGame
     {
         public char[] board { get; set; }
+        public enum Player { User, Computer };
+        public const int HEADS = 0; 
+        public const int TAILS = 1;
         public char player = ' ';
         public char computer = ' ';
         /// <summary>
@@ -66,7 +69,6 @@ namespace TicTacToe
 
                 }
 
-
         }
         public bool CheckFreeSpace(int index)
         {
@@ -75,5 +77,11 @@ namespace TicTacToe
             else
                 return false;
         }
+        public  Player Toss()
+        {
+            return new Random().Next(0, 2) == 1 ? Player.User : Player.Computer;
+        }
+
+        
     }
 }
