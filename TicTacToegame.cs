@@ -7,34 +7,40 @@ namespace TicTacToe
 
     class TicTacToeGame
     {
-
-        public char player { get; set; }
-        public char computer { get; set; }
+        public char[] board { get; set; }
+        public char player = ' ';
+        public char computer = ' ';
+        /// <summary>
+        /// Creating the TicTacToe game Board of size 3 x 3
+        /// </summary>
         public void InitializeBoard()
         {
-            char[] board = new char[10];
+            board = new char[10];
 
             for (int i = 1; i < 10; i++)
                 board[i] = ' ';
         }
+        /// <summary>
+        /// Choosing Option for between X and O for Player and Computer
+        /// </summary>
+        /// <returns></returns>
         public char ChooseOption()
         {
             Console.Write("Choose X or O : ");
             var input = Convert.ToChar(Console.ReadLine());
-            char input = Convert.ToChar(Console.ReadLine());
-            //if player selects X
-            if (input == 'X')
-            {
-                playerChar = 'X';
-                systemChar = 'O';
-            }
-            //if player selects O
-            else if (input == 'O')
-            {
-                playerChar = 'O';
-                systemChar = 'X';
-            }
+
             return (input == 'X' || input == 'O') ? input : ChooseOption();
+        }
+        /// <summary>
+        /// Printing the Board of size 3 X 3
+        /// </summary>
+        public void ShowBoard()
+        {
+            Console.WriteLine(""+board[1]+"|"+ board[2]+"|"+ board[3]);
+            Console.WriteLine("" + board[4] + "|" + board[5] + "|" + board[6]);
+            Console.WriteLine("" + board[7] + "|" + board[8] + "|" + board[9]);
+
+
         }
 
     }
