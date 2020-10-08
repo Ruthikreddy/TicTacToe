@@ -47,26 +47,33 @@ namespace TicTacToe
         {
             Console.WriteLine("Choose the desired Index from 1 to 9");
             int index= Convert.ToInt32(Console.ReadLine());
-            
-            
-                if(index<0||index>9)
+            var isFree = CheckFreeSpace(index);
+
+            if (index<0||index>9)
                 {
                     Console.WriteLine("Invalid Index selected please enter Index from 1 to 9");
                     index = Convert.ToInt32(Console.ReadLine());
                 }
-                if(board[index]!=' ')
-                {
-                    Console.WriteLine("The Location is already filled please select another Location");
-                    index = Convert.ToInt32(Console.ReadLine());
-                }
-                else
+            if (!isFree)
+            {
+                Console.WriteLine("The Location is not empty please select a different location");
+                index = Convert.ToInt32(Console.ReadLine());
+            }
+            else
                 {
                     board[index] = player;
                     ShowBoard();
 
                 }
-                
-            
+
+
+        }
+        public bool CheckFreeSpace(int index)
+        {
+            if (board[index] == ' ')
+                return true;
+            else
+                return false;
         }
     }
 }
