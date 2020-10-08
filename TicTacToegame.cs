@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Text;
 
 namespace TicTacToe
@@ -37,11 +38,35 @@ namespace TicTacToe
         public void ShowBoard()
         {
             Console.WriteLine(""+board[1]+"|"+ board[2]+"|"+ board[3]);
+            Console.WriteLine("-----");
             Console.WriteLine("" + board[4] + "|" + board[5] + "|" + board[6]);
+            Console.WriteLine("-----");
             Console.WriteLine("" + board[7] + "|" + board[8] + "|" + board[9]);
-
-
         }
+        public void MakeMove()
+        {
+            Console.WriteLine("Choose the desired Index from 1 to 9");
+            int index= Convert.ToInt32(Console.ReadLine());
+            
+            
+                if(index<0||index>9)
+                {
+                    Console.WriteLine("Invalid Index selected please enter Index from 1 to 9");
+                    index = Convert.ToInt32(Console.ReadLine());
+                }
+                if(board[index]!=' ')
+                {
+                    Console.WriteLine("The Location is already filled please select another Location");
+                    index = Convert.ToInt32(Console.ReadLine());
+                }
+                else
+                {
+                    board[index] = player;
+                    ShowBoard();
 
+                }
+                
+            
+        }
     }
 }
