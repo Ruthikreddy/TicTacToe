@@ -10,7 +10,7 @@ namespace TicTacToe
     {
         public char[] board { get; set; }
         public enum Player { User, Computer };
-        public const int HEADS = 0; 
+        public const int HEADS = 0;
         public const int TAILS = 1;
         public char player = ' ';
         public char computer = ' ';
@@ -40,7 +40,7 @@ namespace TicTacToe
         /// </summary>
         public void ShowBoard()
         {
-            Console.WriteLine(""+board[1]+"|"+ board[2]+"|"+ board[3]);
+            Console.WriteLine("" + board[1] + "|" + board[2] + "|" + board[3]);
             Console.WriteLine("-----");
             Console.WriteLine("" + board[4] + "|" + board[5] + "|" + board[6]);
             Console.WriteLine("-----");
@@ -48,40 +48,56 @@ namespace TicTacToe
         }
         public void MakeMove()
         {
-            Console.WriteLine("Choose the desired Index from 1 to 9");
-            int index= Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Choose an Index to mark : ");
+            var index = Convert.ToInt32(Console.ReadLine());
             var isFree = CheckFreeSpace(index);
 
-            if (index<0||index>9)
-                {
-                    Console.WriteLine("Invalid Index selected please enter Index from 1 to 9");
-                    index = Convert.ToInt32(Console.ReadLine());
-                }
-            if (!isFree)
+            if (index <= 0 || index > 9)
+            {
+                Console.WriteLine("Invalid Input!\nTry Again");
+                MakeMove();
+            }
+            else if (board[index] != ' ')
             {
                 Console.WriteLine("The Location is not empty please select a different location");
-                index = Convert.ToInt32(Console.ReadLine());
+                MakeMove();
             }
             else
-                {
-                    board[index] = player;
-                    ShowBoard();
+            {
+                board[index] = player;
+                ShowBoard();
 
-                }
-
+            }
+            if (IsWinner(player))
+                Console.WriteLine("Player Won the game.");
         }
         public bool CheckFreeSpace(int index)
         {
-            if (board[index] == ' ')
-                return true;
-            else
-                return false;
+            return board[index] == ' ';
         }
-        public  Player Toss()
+
+        public Player Toss()
         {
             return new Random().Next(0, 2) == 1 ? Player.User : Player.Computer;
         }
-
+        /// <summary>
+        /// Checking Input Character and Rules For wining Player
+        /// </summary>
+        /// <param name="ch"></param>
+        /// <returns></returns>
+        public bool IsWinner(char ch)
+        {
+            return ((board[1] == ch && board[2] == ch && board[3] == ch) ||
+                    (board[4] == ch && board[5] == ch && board[6] == ch) ||
+                    (board[7] == ch && board[8] == ch && board[9] == ch) ||
+                    (board[1] == ch && board[4] == ch && board[7] == ch) ||
+                    (board[2] == ch && board[5] == ch && board[8] == ch) ||
+                    (board[3] == ch && board[6] == ch && board[9] == ch) ||
+                    (board[1] == ch && board[5] == ch && board[9] == ch) ||
+                    (board[3] == ch && board[5] == ch && board[7] == ch));
+        }
+          
         
     }
 }
